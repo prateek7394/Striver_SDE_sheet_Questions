@@ -18,7 +18,7 @@ struct Node {
 
 void preorderIterative(Node* root, vector<int> &ans){
     // ************* Method 1: By modifying Inorder Iterative code *************
-
+//
     // Node *temp = root;
     // stack<Node*> st;
 
@@ -34,8 +34,8 @@ void preorderIterative(Node* root, vector<int> &ans){
     //     temp = temp->right;
     // }
 
-    // ************** Method 2 **************
 
+    // ************** Method 2 **************
     if(root == NULL){
         return;
     }

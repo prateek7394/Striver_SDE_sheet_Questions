@@ -7,7 +7,7 @@
 using namespace std;
 
 // M1: Using Insertion Sort
-void merge(int arr1[], int arr2[], int n, int m) {
+void merge1(int arr1[], int arr2[], int n, int m) {
   // code here
   int i, k;
   for (i = 0; i < n; i++) {
@@ -35,7 +35,7 @@ void merge(int arr1[], int arr2[], int n, int m) {
 
 // M2: Using Gap Method(Shell Sort):
 
-void merge(int ar1[], int ar2[], int n, int m) {
+void merge2(int ar1[], int ar2[], int n, int m) {
   // code here 
   int gap = ceil((float)(n + m) / 2);
   while (gap > 0) {
@@ -78,7 +78,7 @@ int main() {
     cout << arr2[i] << " ";
   }
   cout << endl;
-  merge(arr1, arr2, 5, 3);
+  merge2(arr1, arr2, 5, 3);
   cout << "After merge:" << endl;
   for (int i = 0; i < 5; i++) {
     cout << arr1[i] << " ";

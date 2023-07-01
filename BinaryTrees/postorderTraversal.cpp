@@ -15,34 +15,77 @@ struct Node {
 };
 
 // Iterative Approach:
+// M1--> Using single stack but reversing the vector(Equivalent to 2 stack method)
 
-void postorderIterative(Node* root, vector<int> &ans){
-    Node *temp = root;
-    stack<Node*> st;
-
-    while(!st.empty() || temp!=NULL){
-        while(temp!=NULL){
-            st.push(temp);
-            ans.push_back(temp->key);
-            temp = temp->left;
+void postorderIterative1(Node* root, vector<int> &ans){
+    if(root == NULL){
+            return;
         }
+
+        Node *temp = root;
+        stack<Node*> st;
+        st.push(temp);
+
+        while(!st.empty()){
+            temp = st.top();
+            st.pop();
+            ans.push_back(temp->key);
+
+            if(temp->left!=NULL){
+                st.push(temp->left);
+            }
+
+            if(temp->right!=NULL){
+                st.push(temp->right);
+            }
+        }
+
+        reverse(ans.begin(), ans.end());
+}
+
+// M2--> Using single stack without reversing(if asked to directly print without storing anywhere)
+
+vector < int > postorderIterative2(Node * cur) {
+
+  vector < int > postOrder;
+  if (cur == NULL) return postOrder;
+
+  stack < Node * > st;
+  while (cur != NULL || !st.empty()) {
+    if (cur != NULL) {
+      st.push(cur);
+      cur = cur -> left;
+    } 
+    else {
+      Node * temp = st.top() -> right;
+      if (temp == NULL) {
         temp = st.top();
         st.pop();
-
-        temp = temp->right;
+        postOrder.push_back(temp -> key);
+        while (!st.empty() && temp == st.top() -> right) {
+          temp = st.top();
+          st.pop();
+          postOrder.push_back(temp -> key);
+        }
+      } 
+      else 
+        cur = temp;
     }
+  }
+  return postOrder;
+
 }
 
 // Recursive Approach:
 
 void postorderRecursive(Node* root, vector<int> &ans){
-        if(root==NULL){
-            return;
-        }
-        postorderRecursive(root->left, ans);
-        postorderRecursive(root->right, ans);
-        ans.push_back(root->key);
+    if(root==NULL){
+        return;
     }
+    postorderRecursive(root->left, ans);
+    postorderRecursive(root->right, ans);
+    ans.push_back(root->key);
+}
 
 int main()
 {

@@ -36,12 +36,14 @@ void merge1(int arr1[], int arr2[], int n, int m) {
 // M2: Using Gap Method(Shell Sort):
 
 void merge2(int ar1[], int ar2[], int n, int m) {
-  // code here 
-  int gap = ceil((float)(n + m) / 2);
+
+  int len = n+m;
+  int gap = ceil((float)(len) / 2); 
+  // ceil can be also calculated as (len/2 + len%2) hence, no need to add float for decimal value of (n+m)/2
   while (gap > 0) {
     int i = 0;
     int j = gap;
-    while (j < (n + m)) {
+    while (j < len) {
       if (j < n && ar1[i] > ar1[j]) {
         // Both i and j lie in arr1
         swap(ar1[i], ar1[j]);
@@ -58,7 +60,7 @@ void merge2(int ar1[], int ar2[], int n, int m) {
       i++;
     }
     if (gap == 1) {
-      gap = 0;
+      gap = 0; // break the while loop
     } else {
       gap = ceil((float) gap / 2);
     }

@@ -42,10 +42,10 @@ vector<vector<int>> subsetsWithDup(vector<int>& nums) {
 // A.S = O(n) for recursive call stack
 
 void findSubsets(int idx, vector<int> &nums, vector<int> &temp, vector<vector<int>> &ans){
-    ans. push_back(temp);
+    ans.push_back(temp);
 
-    for(int i=0; i<nums.size(); i++){
-        if(i!=idx && nums[i]==nums[i-1]){
+    for(int i=idx; i<nums.size(); i++){
+        if(i>idx && nums[i]==nums[i-1]){
             continue;
         }
         else{

@@ -1,56 +1,86 @@
-#include<bits/stdc++.h>
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-long long power(long long x, long long n){
-        if(n==0) return 1;
+int maxNonDecreasingLength(vector<int> &nums1, vector<int> &nums2)
+{
+    int n = nums1.size();
+        vector<int>v1, v2;
+        v1.push_back(nums1[0]);
+        v2.push_back(nums2[0]);
+        int v1m = 1;
+        for(int i=1; i<n; i++){
+            int curr = v1[v1.size()-1];
+            if(nums1[i]<curr && nums2[i]<curr){
+                int s = v1.size();
+                v1m = max (v1m, s);
+                v1.clear();
+                v1.push_back(min(nums1[i], nums2[i]));
+                continue;
+            }
+            if(nums1[i]==curr){
+                v1.push_back(nums1[i]);
+            }
 
-        else if(n%2 == 0){
-            return power(x^2, n/2);
+            else if(nums2[i]==curr){
+                v1.push_back(nums2[i]);
+            }
+            else if(nums1[i]>curr && nums2[i]<curr){
+                v1.push_back(nums1[i]);
+            }
+            else if(nums2[i]>curr && nums1[i]<curr){
+                v1.push_back(nums2[i]);
+            }
+            else{
+                v1.push_back(min(nums1[i], nums2[i]));
+            }
         }
-        else{
-            return x* power(x^2, (n-1)/2);
-        }
+    if(v1.size() > v1m){
+        v1m = v1.size();
     }
 
-class Solution {
-public:
-    long long totalCost(vector<int>& costs, int k, int candidates) {
-        // using min heap to store the cost of each candidate in the current window of size k
-        priority_queue<int,vector<int>,greater<int>> pq1; 
-        priority_queue<int,vector<int>,greater<int>> pq2; 
-        long long ans=0; // total cost
-        int l=0,r=costs.size()-1; // left and right pointer of the window
-        int cnt=0; // number of candidates in the current window
-        while(cnt<k){ // add the first k candidates to the window
-            while(pq1.size()<candidates && l<=r) // add the first candidates to the window
-                pq1.push(costs[l++]); 
-            while(pq2.size()<candidates && r>=l) // add the last candidates to the window
-                pq2.push(costs[r--]);
-            
-            int top1 = pq1.size()>0?pq1.top():INT_MAX; // if the first window is full, then the top of the first window is the minimum cost of the first candidates
-            int top2 = pq2.size()>0?pq2.top():INT_MAX; // if the last window is full, then the top of the last window is the minimum cost of the last candidates
-            
-            if(top1<=top2){ // if the first window is cheaper, then add the first candidate to the window
-                ans+=top1;
-                pq1.pop(); 
+    int v2m=1;
+        for(int i=1; i<n; i++){
+            int curr = v2[v2.size()-1];
+            if(nums1[i]<curr && nums2[i]<curr){
+                int s = v2.size();
+                v2m = max(v2m, s);
+                v2.clear();
+                v2.push_back(min(nums1[i], nums2[i]));
+                continue;
             }
-            else{ // if the last window is cheaper, then add the last candidate to the window
-                ans+=top2;
-                pq2.pop();
+            if(nums1[i]==curr){
+                v2.push_back(nums1[i]);
             }
-            cnt++; // increase the number of candidates in the window
+
+            else if(nums2[i]==curr){
+                v2.push_back(nums2[i]);
+            }
+            else if(nums1[i]>curr && nums2[i]<curr){
+                v2.push_back(nums1[i]);
+            }
+            else if(nums2[i]>curr && nums1[i]<curr){
+                v2.push_back(nums2[i]);
+            }
+            else{
+                v2.push_back(min(nums1[i], nums2[i]));
+            }
         }
-        return ans; // return the total cost
+
+    if(v2.size() > v2m){
+        v2m = v2.size();
     }
-};
+
+    return max(v1m, v2m);
+        
+}
 
 int main()
 {
-    // cout<<power(4,2);
-    int a = 4, b=2;
-    cout<< (a^b) ;
+    vector<int> nums1 = {8,7,4};
+    vector<int> nums2 = {13,4,4};
+
+    int ans = maxNonDecreasingLength(nums1, nums2);
+    cout<<ans;
+
     return 0;
 }
-
-

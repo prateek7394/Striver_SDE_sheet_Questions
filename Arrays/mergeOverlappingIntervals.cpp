@@ -60,7 +60,7 @@ vector<vector<int>> merge(vector<vector<int>> &arr){
 }
 
 int main(){
-    vector<vector<int>>intervals{{1,3}, {2,6}, {8,10}, {15,18}};
+    vector<vector<int>>intervals{{1,2}, {2,3}, {3,4}, {1,3}};
     // vector<vector<int>> v = mergeIntervals(intervals);
     vector<vector<int>> v = merge(intervals);
 

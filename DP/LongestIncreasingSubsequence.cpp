@@ -36,7 +36,7 @@ int helper(vector<int> &nums, int currIdx, int prevIdx)
 }
 
 
-int lengthOfLIS(vector<int> &nums)
+int lengthOfLIS1(vector<int> &nums)
 {
     int currIdx = 0;
     int prevIdx = -1;
@@ -47,32 +47,28 @@ int lengthOfLIS(vector<int> &nums)
 }
 
 
-// **************** Using Tabulation ***********************
-// int lengthOfLIS(vector<int> &nums){
-//     vector<vector<int>> t(nums.size(), vector<int>(nums.size() + 1, -1)); 
-//      for(int i=0; i<=nums.size(); i++){
-//         for(int j=0; j<=nums.size()+1; j++){
-//             if(i==nums.size()) return 0;
-//         }
-//     }
+// **************** Method 2 ***********************
+int lengthOfLIS2(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> dp(n, 1);
+    int ans = 1;
 
-//     for(int i=0; i<nums.size(); i++){
-//         for(int j=0; j<=nums.size()+1; j++){
-//             int notPick = t[i+1][j];
-//             if (j == -1 || nums[i] > nums[j])
-//             {
-//                 int pick = 1 + t[i+1][i];
-//                 t[i][j + 1] = max(pick, notPick);
-//             }
-//             else
-//             {
-//                 t[i][j + 1] = notPick;
-//             }
-//         }
-//     }
-
-//     return t[nums.size()][nums.size()+1];
-// }
+    for(int i=0; i<n; i++){
+        for(int j=0; j<i; j++){
+            if(nums[j]<nums[i]){
+                dp[i] =  max(dp[i], 1+dp[j]);
+                // here we used the pre computed value for longest increasing
+                // subarray till jth index
+                // adding 1 means we are including curr element
+            }
+        }
+        ans = max(ans, dp[i]);
+    }
+    for(auto it: dp){
+        cout<< it<<" ";
+    }
+    return ans;
+}
 
 
 // **************** M3: Using Binary Search & LB/UB ********************
@@ -83,7 +79,7 @@ int lengthOfLIS(vector<int> &nums)
 // lower bound(which gives index of arr[i] if exists or index of first element > arr[i]) 
 // of that element in existing sequence with the element itself
 
-int lengthOfLIS(vector<int>& nums) {
+int lengthOfLIS3(vector<int>& nums) {
     vector<int> temp;
     temp.push_back(nums[0]);
 
@@ -102,5 +98,8 @@ int lengthOfLIS(vector<int>& nums) {
 
 int main()
 {
+    vector<int> arr = {1, 3, 5, 4, 7};
+    int ans = lengthOfLIS2(arr);
+    
     return 0;
 }

@@ -90,6 +90,40 @@ public:
 };
 
 
+// ************************* Method 3: Using Single stack    ****************************
+class MyQueue {
+public:
+    stack<int> st;
+    MyQueue() {}
+    
+    void push(int x) {
+        if(st.empty()){
+            st.push(x);
+            return;
+        }
+
+        int top = st.top();
+        st.pop();
+        push(x);
+        st.push(top);
+        return;
+    }
+    
+    int pop() {
+        int top = st.top();
+        st.pop();
+        return top;
+    }
+    
+    int peek() {
+        return st.top();
+    }
+    
+    bool empty() {
+        return st.empty();
+    }
+};
+
 int main()
 {
     return 0;

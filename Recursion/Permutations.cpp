@@ -49,7 +49,8 @@ void helper(int idx, vector<int> nums, vector<vector<int>> &ans){
 
     for(int i=idx; i<nums.size(); i++){
         // here we are assuming a pointer which starts from 0 and goes till n-1
-        // for each position(index) of pointer, we can swap an element at a particular index with itself && elements at its position
+        // for each position(index) of pointer, we can swap an element at a particular index with itself 
+        // && elements at its position
 
         swap(nums[idx], nums[i]);
         helper(idx+1, nums, ans);

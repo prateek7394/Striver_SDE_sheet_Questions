@@ -17,7 +17,7 @@ using namespace std;
 
 // T.C = O(2n) + O(2n)
 
-vector<int> nextGreaterElements(vector<int>& nums) {
+vector<int> nextGreaterElement(vector<int>& nums) {
     int n = nums.size();
     stack<int>st;
     vector<int> ng(n);
@@ -47,5 +47,7 @@ vector<int> nextGreaterElements(vector<int>& nums) {
 
 int main()
 {
+    vector<int> nums = {5,-1, 0, 8, 2};
+    vector<int> ans = nextGreaterElement(nums);
     return 0;
 }

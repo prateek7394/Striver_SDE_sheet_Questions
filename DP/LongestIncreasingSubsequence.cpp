@@ -47,7 +47,7 @@ int lengthOfLIS1(vector<int> &nums)
 }
 
 
-// **************** Method 2 ***********************
+// **************** Method 2: Using 1d DP ***********************
 int lengthOfLIS2(vector<int>& nums) {
     int n = nums.size();
     vector<int> dp(n, 1);

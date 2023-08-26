@@ -12,7 +12,7 @@ bool search(vector<int>& nums, int target) {
             return true;
         }
 
-        // ---------- Extra lines of code ------------
+        // ---------- Extra lines of code ---------------
         if(nums[s]==nums[mid] && nums[mid]==nums[e]){
             // trim down the search space as these 3 cannot be equal to the target since nums[mid]!=target
             // has been already ensured in above check

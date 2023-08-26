@@ -3,6 +3,7 @@
     "files.associations": {
         "new": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "bitset": "cpp"
     }
 }

@@ -1,7 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Brute Force Approach: 
+// Brute Force Approach:
+// T.C = O(nlogn) + O(n^2)
+// S.C = O(n)
 
 vector<vector<int>> mergeIntervals(vector<vector<int>> & arr) {
 
@@ -12,17 +14,21 @@ vector<vector<int>> mergeIntervals(vector<vector<int>> & arr) {
     for (int i = 0; i < n; i++) {
         int start = arr[i][0], end = arr[i][1];
 
-        //since the interval already covered 
-        //in the ans, we continue
+        //since the current interval already lies in the last inserted interval, skip it 
         if (!ans.empty()) {
             if (start <= ans.back()[1]) {
                 continue;
             }
         }
 
+        // check if other intervals can be merged with current interval
         for (int j = i + 1; j < n; j++) {
             if (arr[j][0] <= end) {
                 end = max(end, arr[j][1]);
+            }
+            else{
+                // subsequent intervals can not be merged as the array is sorted acc. to start
+                break;
             }
         }
 
@@ -34,6 +40,9 @@ vector<vector<int>> mergeIntervals(vector<vector<int>> & arr) {
 
 
 // Optimised Approach:
+// T.C = O(nlogn) + O(n)
+// S.C = O(n)
+
 
 vector<vector<int>> merge(vector<vector<int>> &arr){
     int n = arr.size();

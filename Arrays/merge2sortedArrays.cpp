@@ -6,11 +6,11 @@
 
 using namespace std;
 
-// M1: Using Insertion Sort
+// ------------------------------ M1: Using Insertion Sort ---------------------------
 void merge1(int arr1[], int arr2[], int n, int m) {
   // code here
-  int i, k;
-  for (i = 0; i < n; i++) {
+
+  for (int i = 0; i < n; i++) {
     // take first element from arr1 
     // compare it with first element of second array
     // if condition match, then swap
@@ -23,17 +23,28 @@ void merge1(int arr1[], int arr2[], int n, int m) {
     // then sort the second array
     // put the element in its correct position
     // so that next cycle can swap elements correctly
-    int first = arr2[0];
     // insertion sort is used here
-    for (k = 1; k < m && arr2[k] < first; k++) {
-      arr2[k - 1] = arr2[k];
+    int first = arr2[0];
+    int k;
+    for(k=1; k<m; k++){
+      if(arr2[k]<first){
+        arr2[k-1] = arr2[k];
+      }
+      else{
+        break;
+      }
     }
+    // int k=1;
+    // while(k<m && arr2[k]<first){
+    //   arr2[k-1]=arr2[k];
+    //   k++;
+    // }
     arr2[k - 1] = first;
   }
 }
 
 
-// M2: Using Gap Method(Shell Sort):
+// ------------------------ M2: Using Gap Method(Shell Sort) -----------------------------------
 
 void merge2(int ar1[], int ar2[], int n, int m) {
 
@@ -42,7 +53,7 @@ void merge2(int ar1[], int ar2[], int n, int m) {
   // ceil can be also calculated as (len/2 + len%2) hence, no need to add float for decimal value of (n+m)/2
   while (gap > 0) {
     int i = 0;
-    int j = gap;
+    int j = gap;  
     while (j < len) {
       if (j < n && ar1[i] > ar1[j]) {
         // Both i and j lie in arr1
@@ -56,12 +67,13 @@ void merge2(int ar1[], int ar2[], int n, int m) {
         // Both i and j lie in arr2
         swap(ar2[i - n], ar2[j - n]);
       }
-      j++;
       i++;
+      j++;
     }
     if (gap == 1) {
-      gap = 0; // break the while loop
-    } else {
+        break;
+    } 
+    else {
       gap = ceil((float) gap / 2);
     }
   }
@@ -80,7 +92,7 @@ int main() {
     cout << arr2[i] << " ";
   }
   cout << endl;
-  merge2(arr1, arr2, 5, 3);
+  merge1(arr1, arr2, 5, 3);
   cout << "After merge:" << endl;
   for (int i = 0; i < 5; i++) {
     cout << arr1[i] << " ";

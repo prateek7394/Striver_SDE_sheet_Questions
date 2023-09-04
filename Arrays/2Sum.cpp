@@ -7,13 +7,15 @@ using namespace std;
 
 
 // *************************** Method 1 (Using unordered_map)************************
+// T.C = O(n)
+// S.C = O(n) + O(n)
 vector<int> twoSum(vector<int>& nums, int target) {
     int n = nums.size();
     unordered_map<int,int> m;
     vector<int> ans;
     
     for(int i=0; i<n; i++){
-        auto it = m.find(target-nums[i]);
+        auto it = m.find(target-nums[i]); // O(1)
         if(it!=m.end()){
             ans.push_back(i);
             ans.push_back(m[target-nums[i]]);
@@ -26,8 +28,9 @@ vector<int> twoSum(vector<int>& nums, int target) {
 
 }
 
-// ********************************** M2(Using Priority Queue & 2 pointers) *****************
-
+// ********************************** M2(Using 2 pointers) *****************
+// T.C = O(n logn) + 2 * O(n)
+// S.C = O(n) + O(n)
 vector<int> twoSum(vector<int>& nums, int target) {
     int n = nums.size();
     vector<pair<int, int>> v;

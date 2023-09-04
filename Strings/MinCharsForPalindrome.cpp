@@ -2,10 +2,12 @@
 // Given string str of length N. 
 // The task is to find the minimum characters to be added at the front to make string palindrome.
 
+// SOLUTION: https://www.youtube.com/watch?v=j-1NLHybCSg&t=278s 
+
 #include<bits/stdc++.h>
 using namespace std;
 
-// ------- NOTE ---------
+// ------------ NOTE --------------
 // For string s = "abc":
 // Perfect prefix = {"", "a", "ab"}
 // Suffix = {"c", "bc", "abc", ""}
@@ -46,8 +48,8 @@ vector<int>computeLPSArray(string s){
     }
     
     return lps;
-    
 }
+
 int minChar(string str){
     int n = str.size();
     string rev = str;

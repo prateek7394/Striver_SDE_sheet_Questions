@@ -33,7 +33,7 @@ void setZeroes(vector<vector<int>>& matrix) {
                 }
             }
         }
-    //step 3: Finally update the elements of the 1st col & then 1st row:
+    //step 3: Finally update the elements of the 1st row(dummy row) & then 1st col(dummy col):
         if(matrix[0][0]==0){
             for(int j=0; j<n; j++){
                 matrix[0][j]=0;

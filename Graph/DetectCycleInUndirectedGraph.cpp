@@ -5,8 +5,9 @@ using namespace std;
 
 bool detectLoop( int src, vector<int> adj[], int vis[]){
     vis[src] = 1;
-    queue<pair<int,int>>q;
+    queue<pair<int,int>>q; // {node, parent}
     q.push({src,-1});
+    
     while(!q.empty()){
         int node = q.front().first;
         int parent = q.front().second;
@@ -18,7 +19,9 @@ bool detectLoop( int src, vector<int> adj[], int vis[]){
                 q.push({adjacentNode,node});
             }
             
-            else if(vis[adjacentNode] && adjacentNode!=parent){
+            else if(adjacentNode!=parent){
+                // If a node is visited then it must be the parent otherwise it means that it has been visited 
+                // by some other node in a different path. Hence, there exists a cycle in graph
                 return true;
             }
         }

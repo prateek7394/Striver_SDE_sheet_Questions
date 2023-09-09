@@ -40,6 +40,40 @@ vector<int> topoSort(int V, vector<int> adj[])
 
 // ***************************** M2: Using BFS(Kahn's Algorithm) ********************
 
+vector<int> topoSort(int V, vector<int> adj[]) 
+{
+    vector<int> indegree(V, 0);
+    for(int i=0; i<V; i++){
+        for(int j=0; j<adj[i].size(); j++){
+                indegree[adj[i][j]]++;
+        }   
+    }
+    
+    queue<int> q;
+    for(int i=0; i<V; i++){
+        // Push all nodes having indegree=0 into the queue since nodes having no incoming edges can be
+        // placed at the beginnning of linear ordering
+        if(indegree[i]==0) q.push(i);
+    }
+    
+    vector<int> ans;
+    
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        ans.push_back(node); // add the node into ans
+        
+        for(auto it: adj[node]){
+            // When a node is popped(removed) from graph, the indegree of its adjacent nodes reduces by 1
+            indegree[it]--;
+            if(indegree[it]==0){
+                q.push(it);
+            }
+        }
+    }
+    
+    return ans;
+}
 
 
 int main()

@@ -63,6 +63,7 @@ TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
 
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root==NULL || root==p || root==q){
+            // If current root is equal to any of the nodes or is NULL
             return root;
         }
 
@@ -82,6 +83,7 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         }
         else{
             // If both the nodes are found, that means given root is the ancestor of the two nodes
+            // since we can reach both the nodes from current root
             return root;
         }
 }

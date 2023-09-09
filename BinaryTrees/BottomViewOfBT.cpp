@@ -15,9 +15,9 @@ struct Node {
 };
 
 vector <int> bottomView(Node *root) {
-    // Bottom view includes all the nodes which can be seen from bottom at every possible hd from root
+    // Bottom view includes all the nodes which can be seen from bottom at every possible hd(even 0) from root
     // hd represents horizontal distance from root  
-    vector<int>ans;
+    vector<int>ans;         
     if(root==NULL){ 
         return ans;
     }

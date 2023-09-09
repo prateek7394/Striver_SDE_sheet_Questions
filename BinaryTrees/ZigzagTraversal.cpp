@@ -25,12 +25,12 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root)
     q.push(root);
     int level = 0;
 
-// ******* M1: By reversing the temp vector
+// --------------------- M1: By reversing the temp vector -----------------------
 // while (!q.empty())
 // {
-//     int size = q.size();
+//     int n = q.size();
 
-//     for (int i = 0; i < size; i++)
+//     for (int i = 0; i < n; i++)
 //     {
 //         TreeNode *node = q.front();
 //         q.pop();
@@ -55,34 +55,28 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root)
 
 // return ans;
 
-    //  ************ M2: Without reversing temp vector
+    //  -------------------- M2: Without reversing temp vector ---------------------------
     bool leftToRight = true;
 
     while (!q.empty())
     {
-        int size = q.size();
-        vector<int> row(size);
-        for (int i = 0; i < size; i++)
+        int n = q.size();
+        vector<int> temp(n);
+        for (int i = 0; i < n; i++)
         {
             TreeNode *node = q.front();
             q.pop();
 
-            // find position to fill node's value
-            int index = (leftToRight) ? i : (size - 1 - i);
+            // find position to fill current node value
+            int index = (leftToRight) ? i : (n - 1 - i);
+            temp[index] = node->val;
 
-            row[index] = node->val;
-            if (node->left)
-            {
-                q.push(node->left);
-            }
-            if (node->right)
-            {
-                q.push(node->right);
-            }
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
         }
+        ans.push_back(temp);
         // for next level level
         leftToRight = !leftToRight;
-        ans.push_back(row);
     }
 }
 

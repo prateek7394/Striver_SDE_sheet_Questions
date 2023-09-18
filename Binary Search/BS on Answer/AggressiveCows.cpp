@@ -43,8 +43,8 @@ int aggressiveCows(vector<int> &stalls, int k)
         bool check = isValid(stalls, k, mid);
 
         if(check==true){
-            ans=mid;
-            s=mid+1;
+            ans=mid; // potential ans
+            s=mid+1; // check for any large possible value of mid(min distance)
         }
         else{
             e=mid-1;

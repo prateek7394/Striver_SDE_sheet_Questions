@@ -13,7 +13,7 @@ using namespace std;
 
 class StockSpanner {
 public:
-    stack<pair<int,int>> st;
+    stack<pair<int,int>> st; // {price, count}
     StockSpanner() {}
     
     int next(int price) {
@@ -21,7 +21,7 @@ public:
         int count = 1;
         while(!st.empty() && st.top().first <= price){
             count+=st.top().second;
-            st.pop();    // we add count of poped element's count
+            st.pop();    // we add count of popped element
         }
         st.push({price , count}); // stores the element and count of no. of elements<= given element
         return count;

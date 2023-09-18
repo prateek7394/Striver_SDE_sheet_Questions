@@ -19,7 +19,8 @@ public:
     void push(int x) {
         q2.push(x);
         while(!q1.empty()){
-            q2.push(q1.front());    q1.pop();
+            q2.push(q1.front());    
+            q1.pop();
         }
         // here we are swapping so that new element always comes at front of q2
         swap(q1, q2);
@@ -46,9 +47,7 @@ public:
 class MyStack {
 public:
     queue<int> q;
-    MyStack() {
-        
-    }
+    MyStack() {}
     
     void push(int x) {
         q.push(x);

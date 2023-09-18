@@ -1,3 +1,4 @@
+// PROBLEM:
 // Implement a first in first out (FIFO) queue using only two stacks. 
 // The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
 // void push(int x) Pushes element x to the back of the queue.
@@ -16,9 +17,7 @@ class MyQueue {
 public:
     stack<int> s1;
     stack<int> s2;
-    MyQueue() {
-        
-    }
+    MyQueue() {}
     
     void push(int x) {
         // move all elements from s1 to s2
@@ -51,7 +50,7 @@ public:
 };
 
 // ************************* Method 2 ****************************
-// T.C = amortised O(1) because at only some instances, top() and pop() performs O(n) operation and
+// T.C = amortised O(1) because at only some instances, peek() and pop() performs O(n) operation and
 // for remaining instances it is O(1) while push is always O(1)
 // S.C = O(2n)
 
@@ -60,9 +59,7 @@ class MyQueue {
 public:
     stack<int> input;
     stack<int> output;
-    MyQueue() {
-        
-    }
+    MyQueue() {}
     
     void push(int x) {
         input.push(x);
@@ -90,7 +87,7 @@ public:
 };
 
 
-// ************************* Method 3: Using Single stack    ****************************
+// ************************* Method 3: Using Single stack ****************************
 class MyQueue {
 public:
     stack<int> st;

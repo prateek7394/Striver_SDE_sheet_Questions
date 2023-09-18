@@ -77,7 +77,7 @@ int search(vector<int>& nums, int target) {
     }
 }
 
-// ------------------------------------ M1: Using Single BS --------------------------------------
+// ------------------------------------ M2: Using Single BS --------------------------------------
 // KEY CONCEPT: Identify the sorted half and if target lies in that half, eliminate the other half
 // else, eliminate the sorted half.
 

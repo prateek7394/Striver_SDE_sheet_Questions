@@ -72,6 +72,7 @@ int findMin(vector<int>& nums) {
             s = mid+1;
         }
         else{
+            // means the other half from mid till end is sorted
             ans = min(ans, nums[mid]);
             e = mid-1;
         }

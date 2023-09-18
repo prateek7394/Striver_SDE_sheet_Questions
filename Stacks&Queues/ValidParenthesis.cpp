@@ -10,7 +10,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
- bool isValid(string s) {
+bool isValid(string s) {
     int n = s.size();
     if(n%2!=0) return false;
 

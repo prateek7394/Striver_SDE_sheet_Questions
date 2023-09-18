@@ -15,10 +15,16 @@ int findKRotation(vector<int> &arr){
     while(s<=e){
         int mid = s+(e-s)/2;
 
+        if(arr[s]<=arr[e]){
+            // means whole array is sorted
+            ans = s;
+            break;
+        }
+
         if(arr[s]<=arr[mid]){
             // left half is sorted
             if(arr[s]<arr[ans]){
-                ans = s;
+                ans = s; // update the ans with the index of smallest element out of two
             }
             s = mid+1;
         }

@@ -11,10 +11,9 @@ using namespace std;
 
 // -------------------------- CONCEPT: Monotonic decreasing dequeue ---------------------------------
 // APPROACH: We'll maintain a dequeue of monotonically decreasing elements by storing their indices. 
-// For every window of length k, we will remove all the indices of elements lying 
-// outside the window and if we get an element greater than the maximum element,
-// then there is no point in keeping smaller elements in the window.So, we will 
-// remove all the smaller elements from the back and extract the max element 
+// For every window of length k, we will remove all the indices of elements lying outside the window
+// and if we get an element greater than the maximum element, then there is no point in keeping smaller elements in the window.
+// So, we will remove all the smaller elements from the back and extract the max element 
 // for each window from the front of the dequeue.
 
 // T.C = O(n) [for loop] + O(n) [each element is pushed and popped at least once in worst case]
@@ -30,6 +29,9 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         }
 
         // Remove all the smaller elements from back as they are of no use
+        // Here nums[i] is current element. If current element > elements stored in the dequeue
+        // and we want maximum element in each window, then keeping smaller elements in the dequeue makes no sense. 
+        // Hence we pop them out of the queue
         while(!dq.empty() && nums[dq.back()]<= nums[i]){
             dq.pop_back();
         }

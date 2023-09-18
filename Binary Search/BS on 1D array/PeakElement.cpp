@@ -10,7 +10,7 @@
 
 // APPROACH:
 // Suppose we have only one peak in the arr. So, the graph will be somewhat increasing and then decreasing.
-// We calculated mid and it's greater than mid-1, that means we are on increasing slope and peak is on right.
+// We calculated mid and it is greater than mid-1, that means we are on increasing slope and peak is on right.
 // Else,we are on decreasing slope and peak is on the left.
 // Now, if we have multiple peaks, then even if we discard left or right portion of the mid, we'll definitely
 // get a peak on the other portion of the mid.

@@ -67,9 +67,10 @@ public:
     // T.C = O(1)
     int get(int key) {
         if(m.count(key)){
+            // if key already exists
             node* existingNode = m[key];
             int ans = existingNode->val;
-            m.erase(key);
+            m.erase(key); // remove the entry corresponding to node in the map
             deleteNode(existingNode); // delete the node from its current position
             insertNode(existingNode); // and insert it just after the head node
             m[key] = head->next; // update the address of node in the map by adding a new entry
@@ -81,19 +82,20 @@ public:
     // T.C = O(1)
     void put(int key, int value) {
         if(m.count(key)){
+            // if key already exists
             node *existingNode = m[key];
             m.erase(key);
             deleteNode(existingNode);
         }
 
         if(m.size()==cap){
-            m.erase(tail->prev->key);
-            deleteNode(tail->prev);
+            m.erase(tail->prev->key); // remove the entry corresponding to LRU node in map
+            deleteNode(tail->prev); // delete LRU from its current position
         }
 
-        node *newNode = new node(key, value);
-        insertNode(newNode);
-        m[key] = head->next;
+        node *newNode = new node(key, value); // create a new node with given value
+        insertNode(newNode); // insert it just after the head
+        m[key] = head->next; // update the address of this node in map by adding an entry
     }
 };
 

@@ -6,9 +6,8 @@
 
 // LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
 // int get(int key): Return the value of the key if the key exists, otherwise return -1.
-// void put(int key, int value): Update the value of the key if the key exists. 
-// Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, 
-// evict the least recently used key.
+// void put(int key, int value): Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache.
+// If the number of keys exceeds the capacity from this operation, evict the least recently used key.
 // The functions get() and put() must each run in O(1) average time complexity.
 
 #include<bits/stdc++.h>
@@ -36,10 +35,12 @@ public:
         }
     };
 
+    // create dummy head and tail nodes
     node* head = new node(-1, -1);
     node* tail = new node(-1, -1);
+
     int cap;
-    unordered_map<int, node*> m; 
+    unordered_map<int, node*> m; // {key, address}
 
 // functions to add and delete a node
     void insertNode(node* newNode){
@@ -51,10 +52,10 @@ public:
     }
 
     void deleteNode(node* delNode){
-        node *prev = delNode->prev;
-        node *next = delNode->next;
-        next->prev = prev;
-        prev->next = next;
+        node *prevNode = delNode->prev;
+        node *nextNode = delNode->next;
+        nextNode->prev = prevNode;
+        prevNode->next = nextNode;
     }
 
 // Functions to be implemented according to question
@@ -70,9 +71,11 @@ public:
             // if key already exists
             node* existingNode = m[key];
             int ans = existingNode->val;
+
             m.erase(key); // remove the entry corresponding to node in the map
             deleteNode(existingNode); // delete the node from its current position
             insertNode(existingNode); // and insert it just after the head node
+
             m[key] = head->next; // update the address of node in the map by adding a new entry
             return ans;
         }
@@ -88,6 +91,7 @@ public:
             deleteNode(existingNode);
         }
 
+        // If the map reaches its maximum allowed capacity
         if(m.size()==cap){
             m.erase(tail->prev->key); // remove the entry corresponding to LRU node in map
             deleteNode(tail->prev); // delete LRU from its current position

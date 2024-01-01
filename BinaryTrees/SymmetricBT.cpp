@@ -30,7 +30,9 @@ bool isSymmetric(Node* root) {
                 if(node==NULL){
                     temp.push_back(INT_MIN);
                 }
-                else temp.push_back(node->val);
+                else {
+                    temp.push_back(node->val);
+                }
 
                 if(node!=NULL){
                     if(node->left!=NULL){
@@ -70,19 +72,24 @@ bool isSymmetric(Node* root) {
 // *********** M2: 
 
 
-bool helper(Node* l, Node* r){
-    if(l==NULL || r==NULL){
-        // Both of them must be null
-        return l==r;
-    }
+    bool helper(Node* l, Node* r){
+        if(l==NULL && r==NULL){
+            // if both are NULL
+            return true;
+        }
 
-//      If both left and right nodes are not NULL then:
-    if(l->val != r->val){
-        return false;
-    }
+        if(l==NULL || r==NULL){
+            // if one is NULL and other is not NULL
+            return false;
+        }
 
-    return (helper(l->left, r->right) && helper(l->right, r->left));
-}
+        if(l->val != r->val){
+            // If both left and right nodes are not NULL but their values are not equal
+            return false;
+        }
+
+        return (helper(l->left, r->right) && helper(l->right, r->left));
+    }
 bool isSymmetric(Node* root) {
     return helper(root->left, root->right);
 }

@@ -1,42 +1,84 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-char findMostFrequentChar(const std::string& s) {
-    std::unordered_map<char, int> charFrequency;
-    int maxFrequency = 0;
-    char result = 'z' + 1; // Initializing with a character greater than 'z'
+vector<int> computeLPSArray(string s)
+{
+    int n = s.size();
+    vector<int> lps(n);
 
-    for (int i = 0; i < s.size(); ++i) {
-        int frequency = 0;
-        std::unordered_map<char, bool> charExists;
+    int len = 0;
+    lps[0] = 0;
 
-        for (int j = i; j < s.size(); ++j) {
-            if (!charExists[s[j]]) {
-                charExists[s[j]] = true;
-                ++frequency;
+    int i = 1;
+    while (i < n)
+    {
+        if (s[i] == s[len])
+        {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else
+        {
+            if (len == 0)
+            {
+                lps[i] = 0;
+                i++;
             }
-
-            if (frequency > maxFrequency || (frequency == maxFrequency && s[j] < result)) {
-                maxFrequency = frequency;
-                result = s[j];
+            else
+            {
+                len = lps[len - 1]; // move len pointer to lps value at prev idx
             }
         }
     }
 
-    return result;
+    return lps;
+}
+vector<int> search(string pat, string txt)
+{
+    int p = pat.size(), t = txt.size();
+    vector<int> lps = computeLPSArray(pat);
+
+    int i = 0, j = 0;
+    vector<int> ans;
+
+    while (i < t)
+    {
+        if (txt[i] == pat[j])
+        {
+            i++;
+            j++;
+        }
+
+        else if (j > 0)
+        {
+            j = lps[j - 1];
+        }
+        else
+        {
+            i++;
+        }
+
+        if (j == p)
+        {
+            ans.push_back(i - j + 1);
+            cout<<i<<" "<<j<<endl;
+        }
+    }
+
+    return ans;
 }
 
-int main() {
-    // string s(3, 'a');
-    // cout<<s<<endl;
+int main()
+{
 
-    std::string inputString;
-    std::cout << "Enter the string: ";
-    std::cin >> inputString;
+    string txt = "abcbabca";
+    string pat = "bc";
+    cout<<pat[2]<<endl;
+    // vector<int> v = search(pat, txt);
 
-    char mostFrequentChar = findMostFrequentChar(inputString);
-
-    std::cout << "The character that appears most often across all substrings is: " << mostFrequentChar << std::endl;
-
+    // for(auto it: v){
+    //     cout<<it<<" ";
+    // }
     return 0;
 }

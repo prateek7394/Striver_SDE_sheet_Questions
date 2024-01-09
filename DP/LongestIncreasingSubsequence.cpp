@@ -59,12 +59,12 @@ int lengthOfLIS2(vector<int>& nums) {
         for(int j=0; j<i; j++){
             if(nums[j]<nums[i]){
                 dp[i] =  max(dp[i], 1+dp[j]);
-                // here we used the pre computed value for longest increasing
-                // subarray till jth index
+                // here we used the pre computed value for longest increasing subarray till jth index
+                // we keep updating value of dp[i] for each value of dp[j] so that it remains maximum
                 // adding 1 means we are including curr element
             }
         }
-        ans = max(ans, dp[i]);
+        ans = max(ans, dp[i]); // update the global ans storing the length of LIS
     }
     for(auto it: dp){
         cout<< it<<" ";

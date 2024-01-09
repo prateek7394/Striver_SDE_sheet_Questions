@@ -16,8 +16,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// =================== Step 1: Generate LPS array for the given string ===========================
-// LPS stands for longest prefix suffix array. Using LPS, we discard that part of string which is already a palindrome.
+// =================== Step 1: Generate LPS array for the pattern string ===========================
+// LPS stands for Longest Prefix Suffix array. 
+// Using LPS, we discard that part of string which is already a palindrome.
 // Each index i of lps array denotes the length of the longest perfect prefix which is also
 // a suffix in the substring from 0 to i.
 
@@ -57,7 +58,8 @@ int strStr(string haystack, string needle) {
     int h = haystack.size(), n = needle.size();
     if(n>h) return -1;
 
-    vector<int> lps = computeLPSArray(needle);
+    // Generate lps array for pattern string
+    vector<int> lps = computeLPSArray(needle); 
 
     int i=0, j=0;
 
